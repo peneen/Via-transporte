@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIA - Frete Rápido de Caminhão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+    nav ul li {
+      display: inline;
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      background-color: #555;
+      border-radius: 5px;
+    }
+    nav ul li a:hover {
+      background-color: #777;
+    }
+    section {
+      padding: 20px;
+      margin: 10px 0;
+      background-color: white;
+      border-radius: 5px;
+    }
+    .tabs {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .tab-links {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #333;
+    }
+    .tab-links a {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #f4f4f4;
+      text-decoration: none;
+      color: #333;
+      border-radius: 5px 5px 0 0;
+    }
+    .tab-links a:hover {
+      background-color: #ddd;
+    }
+    .tab-content {
+      display: none;
+    }
+    .active-tab {
+      display: block;
+    }
+    .form-section {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    input[type="text"], input[type="email"], input[type="password"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>VIA</h1>
+      <p>Frete Rápido de Caminhão</p>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showTab('sobre')">Sobre a Empresa</a></li>
+      <li><a href="#" onclick="showTab('cadastro')">Cadastro de Caminhoneiros</a></li>
+      <li><a href="#" onclick="showTab('solicitacao')">Solicitação de Frete</a></li>
+      <li><a href="#" onclick="showTab('contato')">Contato</a></li>
+      <li><a href="#" onclick="showTab('admin')">Área Administrativa</a></li>
+    </ul>
+  </nav>
+
+  <div class="tabs">
+    <!-- Tab Contents -->
+    <div class="tab-content sobre" id="sobre">
+      <h2>Sobre a VIA</h2>
+      <p>A VIA é uma empresa especializada no transporte de mudanças e fretes rápidos, oferecendo soluções logísticas práticas e eficientes. Com a missão de facilitar a vida de nossos clientes, garantimos um serviço ágil e seguro para o transporte de móveis, eletrodomésticos e outros bens de sua casa ou empresa.
+
+        Contamos com uma frota de caminhões modernos e motoristas experientes, preparados para atender a diferentes tipos de carga e distâncias. Na VIA, o compromisso com a pontualidade, segurança e custo-benefício é a nossa maior prioridade.
+        
+        Nosso foco é proporcionar uma experiência sem preocupações, com um atendimento personalizado e ágil, para que você possa contar conosco sempre que precisar. Seja para mudanças residenciais, comerciais ou fretes pontuais, a VIA é a sua parceira de confiança no transporte de carga.
+        </p>
+    </div>
+
+    <div class="tab-content cadastro" id="cadastro">
+      <h2>Cadastro de Caminhoneiros</h2>
+      <div class="form-section">
+        <form id="driverForm">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" required>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" required>
+          <label for="vehicle">Veículo:</label>
+          <input type="text" id="vehicle" required>
+          <button type="submit">Cadastrar Caminhoneiro</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content solicitacao" id="solicitacao">
+      <h2>Solicitação de Frete</h2>
+      <div class="form-section">
+        <form id="solicitacaoForm">
+          <label for="origin">Origem:</label>
+          <input type="text" id="origin" required>
+          <label for="destination">Destino:</label>
+          <input type="text" id="destination" required>
+          <button type="submit">Solicitar Frete</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content contato" id="contato">
+      <h2>Contato</h2>
+      <p>Email: <a href="mailto:contato@viafrete.com">contato@viafrete.com</a></p>
+      <p>Telefone: (11) 99999-9999</p>
+    </div>
+
+    <div class="tab-content admin" id="admin">
+      <h2>Área Administrativa</h2>
+      <div id="admin-password-section">
+        <label for="admin-password">Digite a senha para acessar:</label>
+        <input type="password" id="admin-password" placeholder="Senha">
+        <button type="button" onclick="checkAdminPassword()">Entrar</button>
+      </div>
+      <div id="admin-area" style="display:none;">
+        <h3>Motoristas Cadastrados:</h3>
+        <ul id="driversList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 VIA - Frete Rápido de Caminhão. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    let drivers = [];
+
+    function showTab(tab) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(t => t.style.display = 'none');
+      document.getElementById(tab).style.display = 'block';
+    }
+
+    function checkAdminPassword() {
+      const password = document.getElementById('admin-password').value;
+      const correctPassword = 'senha123'; // Senha para acessar a área administrativa
+      if (password === correctPassword) {
+        document.getElementById('admin-area').style.display = 'block';
+        displayDrivers();
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+
+    function displayDrivers() {
+      const listElement = document.getElementById('driversList');
+      listElement.innerHTML = ''; // Limpa a lista
+      drivers.forEach(driver => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Nome: ${driver.name}, E-mail: ${driver.email}, Veículo: ${driver.vehicle}`;
+        listElement.appendChild(listItem);
+      });
+    }
+
+    document.getElementById('driverForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const vehicle = document.getElementById('vehicle').value;
+      drivers.push({ name, email, vehicle });
+      alert('Caminhoneiro cadastrado com sucesso!');
+      document.getElementById('driverForm').reset();
+    });
+
+    document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const origin = document.getElementById('origin').value;
+      const destination = document.getElementById('destination').value;
+      alert(`Solicitação de frete registrada: De ${origin} para ${destination}.`);
+      document.getElementById('solicitacaoForm').reset();
+    });
+
+    // Exibe a primeira aba (sobre)
+    showTab('sobre');
+  </script>
+
+</body>
+</html>

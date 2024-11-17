@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Administrativa - VIA</title>
+</head>
+<body>
+  <h2>Área Administrativa - VIA</h2>
+  
+  <!-- Formulário de senha -->
+  <div id="passwordForm">
+    <label for="password">Digite a senha de administrador:</label>
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="checkPassword()">Entrar</button>
+  </div>
+  
+  <div id="adminContent" style="display: none;">
+    <h3>Bem-vindo à área administrativa!</h3>
+    
+    <!-- Exibir os motoristas cadastrados -->
+    <h4>Motoristas Cadastrados:</h4>
+    <ul id="driversList"></ul>
+    
+    <!-- Aqui você pode adicionar mais funcionalidades -->
+  </div>
+
+  <script>
+    // Lista de motoristas cadastrados (gerada a partir do formulário de cadastro)
+    let drivers = [
+      { name: "João Silva", email: "joao@exemplo.com", vehicle: "Caminhão Pequeno" },
+      { name: "Maria Oliveira", email: "maria@exemplo.com", vehicle: "Caminhão Médio" }
+    ];
+    
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      const correctPassword = "senha123"; // Senha para acessar o admin
+
+      if (password === correctPassword) {
+        document.getElementById("passwordForm").style.display = "none"; // Esconde o formulário
+        document.getElementById("adminContent").style.display = "block"; // Exibe o conteúdo administrativo
+        
+        // Exibir a lista de motoristas cadastrados
+        displayDrivers();
+      } else {
+        alert("Senha incorreta. Tente novamente.");
+      }
+    }
+
+    // Função para exibir os motoristas na página administrativa
+    function displayDrivers() {
+      const listElement = document.getElementById("driversList");
+      listElement.innerHTML = ""; // Limpa a lista existente
+
+      drivers.forEach(driver => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `Nome: ${driver.name}, E-mail: ${driver.email}, Veículo: ${driver.vehicle}`;
+        listElement.appendChild(listItem);
+      });
+    }
+  </script>
+</body>
+</html>
